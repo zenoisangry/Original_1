@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Contents/Scenes/ZenoScene.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
