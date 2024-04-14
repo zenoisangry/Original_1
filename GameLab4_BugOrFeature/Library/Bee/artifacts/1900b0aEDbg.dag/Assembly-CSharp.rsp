@@ -362,6 +362,7 @@
 "Assets/Contents/Scripts/GameStates/GSPause.cs"
 "Assets/Contents/Scripts/GameStates/IGameStates.cs"
 "Assets/Contents/Scripts/Managers/GameManager.cs"
+"Assets/Contents/Scripts/Managers/GameStatesManager.cs"
 "Assets/Contents/Scripts/Managers/InputManager.cs"
 "Assets/Contents/Scripts/Managers/SoundManager.cs"
 "Assets/Contents/Scripts/Managers/UIManager.cs"
@@ -369,7 +370,7 @@
 "Assets/Contents/Scripts/Player/PlayerMovement.cs"
 "Assets/Contents/Scripts/UI/IGameUI.cs"
 "Assets/Contents/Scripts/UI/UIGameplay.cs"
-"Assets/Contents/Scripts/UI/UIMenu.cs"
+"Assets/Contents/Scripts/UI/UIMainMenu.cs"
 "Assets/Contents/Scripts/UI/UIPause.cs"
 -langversion:9.0
 
