@@ -353,6 +353,66 @@ Received Import Request.
   path: Assets/Contents/Textures/Menu/principale-gioca-click.png
   artifactKey: Guid(b09648b5db5183046b5791f82ee889d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Contents/Textures/Menu/principale-gioca-click.png using Guid(b09648b5db5183046b5791f82ee889d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fcaf2782278617ad5d6d3154ddb4f7d5') in 0.036643 seconds
+  Time since last request: 10.798773 seconds.
+  path: Assets/Contents/TextMesh Pro/Fonts/LiberationSans.ttf
+  artifactKey: Guid(e3265ab4bf004d28a9537516768c1c75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Contents/TextMesh Pro/Fonts/LiberationSans.ttf using Guid(e3265ab4bf004d28a9537516768c1c75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '868ae7279cb8681e901fb13a12c8cb7e') in 0.025525 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Contents/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+  artifactKey: Guid(8f586378b4e144a9851e7b34d9b748ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Contents/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset using Guid(8f586378b4e144a9851e7b34d9b748ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8dc8046acb5f4493b0a12d921d5d2b72') in 0.036574 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 9
+========================================================================
+Received Import Request.
+  Time since last request: 90.824652 seconds.
+  path: Assets/Contents/FBX
+  artifactKey: Guid(185413a647163b248917a06a407bca8d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Contents/FBX using Guid(185413a647163b248917a06a407bca8d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38dda85e9698ff6246e6ed29d92a093e') in 0.002664 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 12.386370 seconds.
+  path: Assets/Contents/FBX/boock_LOW.fbx
+  artifactKey: Guid(31c0a90f41d700b45bff89edab4b3167) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Contents/FBX/boock_LOW.fbx using Guid(31c0a90f41d700b45bff89edab4b3167) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cfe9a8f71d7d7e83018cec9940b59fae') in 0.035695 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 8
+========================================================================
+Received Import Request.
+  Time since last request: 11.333085 seconds.
+  path: Assets/Contents/FBX/boock_LOW.fbx
+  artifactKey: Guid(31c0a90f41d700b45bff89edab4b3167) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Contents/FBX/boock_LOW.fbx using Guid(31c0a90f41d700b45bff89edab4b3167) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a4d3049b40e8ebfbd9027ae9ef1a197') in 0.031387 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 8
+========================================================================
+Received Import Request.
+  Time since last request: 21.681257 seconds.
+  path: Assets/Contents/FBX/boock_LOW.fbx
+  artifactKey: Guid(31c0a90f41d700b45bff89edab4b3167) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Contents/FBX/boock_LOW.fbx using Guid(31c0a90f41d700b45bff89edab4b3167) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a8162d265579cce97e1965afd340c5e') in 0.032850 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 8
+========================================================================
+Received Import Request.
+  Time since last request: 80.907889 seconds.
+  path: Assets/Contents/FBX/PowerUP.fbx
+  artifactKey: Guid(e671bc7711ae0284dbfc8be751b51201) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Contents/FBX/PowerUP.fbx using Guid(e671bc7711ae0284dbfc8be751b51201) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82a8b4a500b09b86d7ece177a3b2e076') in 0.023526 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 89.744018 seconds.
+  path: Assets/Contents/Prefabs/Prefab_powerup.prefab
+  artifactKey: Guid(15d4edfd0f2fd5f4cb288df2897e351d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Contents/Prefabs/Prefab_powerup.prefab using Guid(15d4edfd0f2fd5f4cb288df2897e351d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2eebbc6484b949320a26a297699368a0') in 0.013472 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 2
 ========================================================================
