@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Contents/Scenes/3DScene.unity
+- path: Assets/Contents/Scenes/ZenoScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
