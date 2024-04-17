@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIMainMenu : MonoBehaviour
+public class UIMainMenu : MonoBehaviour, IGameUI
 {
+    public UIManager.GameUI UIType;
+
     public Button playButton;
     public Button optionsButton;
     public Button exitButton;
@@ -32,5 +34,7 @@ public class UIMainMenu : MonoBehaviour
         Application.Quit();
     }
     public UIManager.GameUI GetUIType()
-    { return UIManager.GameUI.MainMenu; }
+    {
+        return UIType;
+    }
 }

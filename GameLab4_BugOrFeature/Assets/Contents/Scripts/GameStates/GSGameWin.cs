@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameStatesManager;
 
-public class GSGameWin : MonoBehaviour
+public class GSGameWin : IGameStates
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnStateEnter()
     {
-        
+        GameManager.instance.Pause(true);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void OnStateUpdate() { }
+    public void OnStateExit()
     {
-        
+        UIManager.instance.ResetCurrentUI();
+        //LevelManager.instance.DestroyLevel();
+        GameManager.instance.Pause(false);
     }
 }

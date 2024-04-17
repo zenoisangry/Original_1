@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UIGameWin : MonoBehaviour
+public class UIGameWin : MonoBehaviour, IGameUI
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public UIManager.GameUI UIType;
 
-    // Update is called once per frame
-    void Update()
+    public Button mainMenuButton;
+
+    public void Init()
     {
-        
+        mainMenuButton.onClick.AddListener(OnMainMenuButtonClick);
+    }
+    public void SetActive(bool active)
+    {
+        gameObject.SetActive(active);
+    }
+    private void OnMainMenuButtonClick()
+    {
+        GameStatesManager.instance.SetCurrentGameState(GameStatesManager.GameStates.MainMenu);
+    }
+    public UIManager.GameUI GetUIType()
+    {
+        return UIType;
     }
 }

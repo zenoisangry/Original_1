@@ -29,7 +29,6 @@ public class UIManager : MonoBehaviour
         Pause,
         Gameplay,
         GameWin,
-        GameOver
     }
 
     private Dictionary<GameUI, IGameUI> registeredUIs = new Dictionary<GameUI, IGameUI>();

@@ -5,6 +5,7 @@ using static GameStatesManager;
 
 public class GameStatesManager : MonoBehaviour
 {
+    public IGameStates currentGameState = null;
     private static GameStatesManager _instance;
     public static GameStatesManager instance
     {
@@ -30,15 +31,11 @@ public class GameStatesManager : MonoBehaviour
         Pause,
         Gameplay,
         GameWin,
-        GameOver
     }
-
-    public IGameStates currentGameState = null;
 
     public void RegisterState(GameStates gstate, IGameStates state)
     {
         registeredGameStates.Add(gstate, state);
-
     }
     public void SetCurrentGameState(GameStates gstate)
     {
@@ -50,7 +47,6 @@ public class GameStatesManager : MonoBehaviour
         newState.OnStateEnter();
         currentGameState = newState;
     }
-
     void Update()
     {
         currentGameState?.OnStateUpdate();
