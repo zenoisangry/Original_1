@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
     public LayerMask collisionMask;
     public float speed = 10;
     float damage = 1;
-
-    Player player;
 
     public void SetSpeed(float newSpeed)
     {
@@ -43,9 +40,5 @@ public class Projectile : MonoBehaviour
             damageableObject.TakeHit(damage, hit);
         }
         GameObject.Destroy(gameObject);
-    }
-    public void SlowBullets()
-    {
-        speed = 4;
     }
 }

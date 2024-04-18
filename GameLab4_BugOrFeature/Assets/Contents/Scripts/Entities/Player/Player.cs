@@ -13,6 +13,7 @@ public class Player : LivingEntity
     public GunController gunController;
     public Gun gun;
     public Projectile projectile;
+    public Animator playerAnimator;
 
     public bool isHeadAttached = false;
     public bool areArmsAttached = false;
@@ -22,6 +23,7 @@ public class Player : LivingEntity
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        playerAnimator = GetComponent<Animator>();
     }
     public override void Start()
     {
@@ -50,15 +52,32 @@ public class Player : LivingEntity
         {
             gunController.Shoot();
         }
-        while (areArmsAttached == true)
+        if (areArmsAttached == true)
         {
             moveSpeed = 7.5f;
-            gun.DifficultShooting();
         }
-
         if (areLegsAttached == true)
         {
             moveSpeed = 7.5f;
+        }
+        if(isHeadAttached  == true)
+        {
+
+        }
+        if(isTorsoAttached == true)
+        {
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        {
+            playerAnimator.SetBool("Walking", true);
+            playerAnimator.SetBool("Idle", false);
+        }
+        else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        {
+            playerAnimator.SetBool("Walking", false);
+            playerAnimator.SetBool("Idle", true);
         }
     }
 }
