@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float moveSpeed = 8f;
     public Camera viewCamera;
     public PlayerController controller;
+    public GunController gunController;
 
     private void Awake()
     {
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        gunController = GetComponent<GunController>();
         viewCamera = Camera.main;
     }
     private void Update()
@@ -35,6 +37,10 @@ public class Player : MonoBehaviour
             Vector3 point = ray.GetPoint(rayDistance);
             Debug.DrawLine(ray.origin, point, Color.red);
             controller.LookAt(point);
+        }
+        if (Input.GetMouseButton(0))
+        {
+            gunController.Shoot();
         }
     }
 }
