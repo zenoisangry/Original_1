@@ -1,18 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private static SoundManager _instance;
+    public static SoundManager instance
     {
-        
+        get
+        {
+            if (_instance == null)
+                _instance = FindAnyObjectByType<SoundManager>();
+            if (_instance == null)
+                Debug.LogError("GameManager not found, can't create singleton object");
+            return _instance;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public AudioSource source;
+    public AudioClip level, menu;
+
+    public void menutheme()
     {
-        
+        if (source.clip != menu)
+        {
+            source.clip = menu;
+            source.volume = 0.3F;
+            source.Play();
+        }
+    }
+    public void leveltheme()
+    {
+        if (source.clip != level)
+        {
+            source.clip = level;
+            source.Play();
+        }
+        source.volume = 0.3F;
+    }
+    public void pausetheme()
+    {
+        source.volume = 0.15F;
     }
 }
