@@ -115,7 +115,7 @@ public class PowerUpsManager : MonoBehaviour
     }
     public void Torso()
     {
-        PlayerMovement playerMovement = LevelManager.instance.playerInstance.GetComponent<PlayerMovement>();
+        Player playerMovement = LevelManager.instance.playerInstance.GetComponent<Player>();
 
         if (PowerUpsManager.instance.collectedPowerUps[PowerUpsManager.PowerUps.TORSO] > 0 && internalLightTimer > 0)
         {

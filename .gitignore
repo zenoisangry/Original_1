@@ -133,3 +133,5 @@ Assets/AssetBundles/
 .idea/
 *.png
 Assets/Contents/Textures/UI/SkinSelect/Uramaki.png.meta
+GameLab4_BugOrFeature/Library/Artifacts/
+GameLab4_BugOrFeature/Library/Bee/
