@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("Start game");
-        //LevelManager.instance.SetCameraCanMove(true);
+        LevelManager.instance.StartLevel();
         isGameStarted = true;
     }
     public void Pause(bool active)

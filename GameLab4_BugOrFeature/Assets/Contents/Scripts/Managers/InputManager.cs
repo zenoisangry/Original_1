@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("PlayerInput is not initialized.");
+            Debug.LogWarning("PlayerInput is not initialized.");
         }
     }
 
