@@ -6,6 +6,16 @@ using static PowerUpsManager;
 
 public class LevelManager : MonoBehaviour
 {
+    public Wave[] waves;
+    public Enemy enemy;
+
+    Wave currentWave;
+    int currentWaveNumber;
+
+    int enemiesRemainingToSpawn;
+    int enemiesRemainingAlive;
+    float nextSpawnTime;
+
     private static LevelManager _instance;
     public static LevelManager instance
     {
@@ -14,160 +24,51 @@ public class LevelManager : MonoBehaviour
             if (_instance == null)
                 _instance = FindAnyObjectByType<LevelManager>();
             if (_instance == null)
-                Debug.LogError("LevelManager not found, can't create singleton object");
+                Debug.LogError("GameManager not found, can't create singleton object");
             return _instance;
         }
     }
 
-
-    public struct PowerUp
+    void Start()
     {
-        public PowerUps type;
-        public GameObject powerUpObject;
+        NextWave();
     }
-
-    public GameObject enemyObject;
-    public GameObject enemyInstance;
-    public GameObject playerObject;
-    public GameObject playerInstance;
-    public GameObject levelObject;
-    public GameObject levelInstance;    
-
-
-    public float enemySpeed;
-    public int enemyCount;
-    public Transform enemySpawnContainer;
-    public List<Transform> enemySpawnPoints = new List<Transform>();
-    private List<Transform> enemyOccupiedPositions = new List<Transform>();
-    private List<GameObject> enemyInstancies = new List<GameObject>();
-
-    public Transform playerSpawnContainer;
-    private List<Transform> playerSpawnPoints = new List<Transform>();
-
-
-    public int powerUpsNumber = 4;
-    public GameObject powerUpObject;
-    public GameObject powerUpInstance;
-    public Transform powerUpSpawnContainer;
-    public List<PowerUp> powerUps = new List<PowerUp>();
-    public List<Transform> powerUpSpawnPositions = new List<Transform>();
-    private List<Transform> powerUpOccupiedPositions = new List<Transform>();
-    private PowerUp[] powerUpsToSpawn;
-
-
-    public void StartLevel()
+    void Update()
     {
-        //GameManager.instance.levelOst.Play();
-        SpawnPlayer();
-        SpawnPowerUps();
-        SpawnEnemies();
-    }
-    public void SpawnPlayer()
-    {
-        InitializeSpawnPositions(playerSpawnContainer, ref playerSpawnPoints);
-        int spawnPositionIndex = Random.Range(0, playerSpawnPoints.Count - 1);
-        playerInstance = GameObject.Instantiate(playerObject);
-        playerInstance.transform.SetPositionAndRotation(playerSpawnPoints[spawnPositionIndex].position, playerSpawnPoints[spawnPositionIndex].rotation);
-        playerInstance.transform.SetParent(transform);
-        playerInstance.SetActive(true);
-    }
-    public void SpawnPowerUps()
-    {
-        InitializeSpawnPositions(powerUpSpawnContainer, ref powerUpSpawnPositions);
-        GeneratePowerUpsRandomPool();
-        // Per ogni tipo di power up che ci deve essere in scena 
-        // creo un nuovo power up nella quantit� generata nel pool
-        foreach (PowerUp powerUp in powerUpsToSpawn)
+        if (enemiesRemainingToSpawn > 0 && Time.time > nextSpawnTime)
         {
-            int spawnPositionIndex = Random.Range(0, powerUpSpawnPositions.Count - 1);
-            powerUpOccupiedPositions.Add(powerUpSpawnPositions[spawnPositionIndex]);
-            GameObject newPowerUp = GameObject.Instantiate(powerUp.powerUpObject);
-            // Set new power up properties
-            newPowerUp.transform.SetParent(transform);
-            newPowerUp.transform.position = powerUpSpawnPositions[spawnPositionIndex].position;
-            powerUpSpawnPositions.RemoveAt(spawnPositionIndex);
+            enemiesRemainingToSpawn--;
+            nextSpawnTime = Time.time + currentWave.timeBetweenSpawns;
 
-            //HandlePowerUpCollision pwrUpScript = newPowerUp.GetComponent<HandlePowerUpCollision>();
-            //pwrUpScript.powerUpType = powerUp.type;
-
+            Enemy spawnedEnemy = Instantiate(enemy, Vector3.zero, Quaternion.identity) as Enemy;
+            spawnedEnemy.OnDeath += OnEnemyDeath;
         }
     }
-
-    public void GeneratePowerUpsRandomPool()
+    void OnEnemyDeath()
     {
-        powerUpsToSpawn = new PowerUp[powerUpsNumber];
-        for (int i = 0; i < powerUpsNumber; i++)
+        enemiesRemainingAlive--;
+
+        if (enemiesRemainingAlive == 0)
         {
-            int index = Random.Range(0, powerUps.Count);
-            powerUpsToSpawn[i] = powerUps[index];
+            NextWave();
         }
     }
-
-    public void DestroyPowerUp(GameObject powerUp)
+    void NextWave()
     {
-        int removedObjectIndex = 0;
-        for (int i = 0; i < powerUpOccupiedPositions.Count; i++)
+        currentWaveNumber++;
+        print("Wave: " + currentWaveNumber);
+        if (currentWaveNumber - 1 < waves.Length)
         {
-            if (powerUpOccupiedPositions[i].position == powerUp.transform.position)
-            {
-                powerUpSpawnPositions.Add(powerUpOccupiedPositions[i]);
-                removedObjectIndex = i;
-            }
-        }
-        powerUpOccupiedPositions.RemoveAt(removedObjectIndex);
+            currentWave = waves[currentWaveNumber - 1];
 
-        GameObject.Destroy(powerUp);
-
-    }
-
-    public void SpawnEnemies()
-    {
-        InitializeSpawnPositions(enemySpawnContainer, ref enemySpawnPoints);
-
-        SpawnGameObject(enemyObject, enemyCount, ref enemySpawnPoints, ref enemyOccupiedPositions, true);
-    }
-
-    public void DestroyEnemies()
-    {
-        for (int i = 0; i < enemyInstancies.Count; i++)
-        {
-            GameObject gameObject = enemyInstancies[i];
-            enemyInstancies.RemoveAt(i);
-            Destroy(gameObject);
+            enemiesRemainingToSpawn = currentWave.enemyCount;
+            enemiesRemainingAlive = enemiesRemainingToSpawn;
         }
     }
-
-    private void InitializeSpawnPositions(Transform spawnContainer, ref List<Transform> spawnPositionsList)
+    [System.Serializable]
+    public class Wave
     {
-        for (int wayPointIndex = 0; wayPointIndex < spawnContainer.childCount; wayPointIndex++)
-        {
-            spawnPositionsList.Add(spawnContainer.GetChild(wayPointIndex));
-        }
-    }
-
-    public void SpawnGameObject(GameObject objectToSpawn, int quantity, ref List<Transform> spawnPositions, ref List<Transform> occupiedPositions, bool isEnemy)
-    {
-
-        for (int i = 0; i < quantity; i++)
-        {
-            int spawnPositionIndex = Random.Range(0, spawnPositions.Count - 1);
-            occupiedPositions.Add(spawnPositions[spawnPositionIndex]);
-            GameObject newObject = GameObject.Instantiate(objectToSpawn);
-            newObject.transform.SetParent(transform);
-            if (isEnemy)
-            {
-                NavMeshHit hit;
-                NavMesh.SamplePosition(spawnPositions[spawnPositionIndex].position, out hit, Mathf.Infinity, NavMesh.AllAreas);
-                newObject.transform.position = hit.position;
-                enemyInstancies.Add(newObject);
-            }
-            else
-            {
-                newObject.transform.position = spawnPositions[spawnPositionIndex].position;
-            }
-
-            spawnPositions.RemoveAt(spawnPositionIndex);
-            newObject.SetActive(true);
-        }
+        public int enemyCount;
+        public float timeBetweenSpawns;
     }
 }

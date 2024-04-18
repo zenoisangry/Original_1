@@ -54,6 +54,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29267ab98e1247343b05080b7677ecad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &3991008411522659959
 GameObject:
   m_ObjectHideFlags: 0
