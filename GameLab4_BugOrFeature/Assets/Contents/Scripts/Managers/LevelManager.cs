@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,9 +9,18 @@ public class LevelManager : MonoBehaviour
 {
     public Wave[] waves;
     public Enemy enemy;
+    public GameObject legsPowerUpObject;
+    public GameObject torsoPowerUpObject;
+    public GameObject armsPowerUpObject;
+    public GameObject headPowerUpObject;
+    public Transform[] spawnPoints; // Array of spawn points
+    public Collider winCollider;
 
     Wave currentWave;
     int currentWaveNumber;
+
+    private int collectedPowerUps = 0;
+    private bool allPowerUpsCollected = false;
 
     int enemiesRemainingToSpawn;
     int enemiesRemainingAlive;
@@ -31,10 +41,41 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        NextWave();
+        SpawnPowerUp(legsPowerUpObject);
+    }
+    void SpawnPowerUp(GameObject powerUpPrefab)
+    {
+        Instantiate(powerUpPrefab, spawnPoints[collectedPowerUps].position, Quaternion.identity);
+    }
+    public void CollectPowerUp()
+    {
+        collectedPowerUps++;
+
+        if (collectedPowerUps >= spawnPoints.Length)
+        {
+            allPowerUpsCollected = true;
+            // Start timer here
+            Debug.Log("All power-ups collected. Timer started.");
+        }
+        else
+        {
+            switch (collectedPowerUps)
+            {
+                case 1:
+                    SpawnPowerUp(torsoPowerUpObject);
+                    break;
+                case 2:
+                    SpawnPowerUp(armsPowerUpObject);
+                    break;
+                case 3:
+                    SpawnPowerUp(headPowerUpObject);
+                    break;
+            }
+        }
     }
     void Update()
     {
+        Debug.Log(collectedPowerUps);
         if (enemiesRemainingToSpawn > 0 && Time.time > nextSpawnTime)
         {
             enemiesRemainingToSpawn--;
@@ -56,13 +97,15 @@ public class LevelManager : MonoBehaviour
     void NextWave()
     {
         currentWaveNumber++;
-        print("Wave: " + currentWaveNumber);
         if (currentWaveNumber - 1 < waves.Length)
         {
             currentWave = waves[currentWaveNumber - 1];
 
             enemiesRemainingToSpawn = currentWave.enemyCount;
             enemiesRemainingAlive = enemiesRemainingToSpawn;
+
+            // Spawn the wave here
+            // Implement your spawning logic
         }
     }
     [System.Serializable]

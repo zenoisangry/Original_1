@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4140016419755323648}
   - component: {fileID: 3910464685965832442}
   - component: {fileID: 5371522774853998369}
+  - component: {fileID: 2291543769040104561}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -47,6 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f1192317516a341ab14d2dc344ff71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  level: {fileID: 8300000, guid: f8cbfd58b0ca02445ae6f5cc4ec642d2, type: 3}
+  menu: {fileID: 8300000, guid: 7544e20c600b3aa4b9d106f7d6a4cfc4, type: 3}
 --- !u!114 &4140016419755323648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f424bd52ff80f499be819b2a93e2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIContainer: {fileID: 2765228072081732515, guid: 95156b081ae7b264fb6fbf2ea40229eb, type: 3}
+  UIContainer: {fileID: 0}
 --- !u!114 &5371522774853998369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,3 +91,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374297f8ccfed184ea8c5e438e7e6f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2291543769040104561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6183262582712984484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d162b80875e37be459e2a39a7126fa40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - enemyCount: 2
+    timeBetweenSpawns: 10
+  - enemyCount: 5
+    timeBetweenSpawns: 7
+  - enemyCount: 7
+    timeBetweenSpawns: 5
+  - enemyCount: 10
+    timeBetweenSpawns: 5
+  - enemyCount: 15
+    timeBetweenSpawns: 5
+  - enemyCount: 20
+    timeBetweenSpawns: 3
+  enemy: {fileID: 3018699939389043059, guid: 977c5b87efe14bf4ab86892953f1829f, type: 3}
+  legsPowerUpObject: {fileID: 1346964289688778494, guid: 81df1f205751de342b8957ae384540e7, type: 3}
+  torsoPowerUpObject: {fileID: 0}
+  armsPowerUpObject: {fileID: 0}
+  headPowerUpObject: {fileID: 0}
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  winCollider: {fileID: 0}
