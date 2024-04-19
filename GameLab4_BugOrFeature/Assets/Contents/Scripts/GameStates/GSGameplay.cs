@@ -16,7 +16,7 @@ public class GSGameplay : IGameStates
     }
     public void OnStateUpdate()
     {
-        if (!GameManager.instance.IsGameStarted() && Input.anyKeyDown)
+        if (!GameManager.instance.IsGameStarted())
         {
             GameManager.instance.StartGame();
         }

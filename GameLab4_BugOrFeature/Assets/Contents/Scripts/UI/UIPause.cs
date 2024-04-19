@@ -8,12 +8,12 @@ public class UIPause : MonoBehaviour, IGameUI
     public UIManager.GameUI UIType;
 
     public Button continueButton;
-    public Button mainMenuButton;
+    public Button quitButton;
 
     public void Init()
     {
         continueButton.onClick.AddListener(OnContinueButtonClick);
-        mainMenuButton.onClick.AddListener(OnMainMenuButtonClick);
+        quitButton.onClick.AddListener(OnQuitButtonClick);
     }
     public void SetActive(bool active)
     {
@@ -22,15 +22,12 @@ public class UIPause : MonoBehaviour, IGameUI
     private void OnContinueButtonClick()
     {
         GameManager.instance.isPauseMenuOpened = false;
+        GameManager.instance.isGameStarted = true;
         GameStatesManager.instance.SetCurrentGameState(GameStatesManager.GameStates.Gameplay);
     }
-    private void OnMainMenuButtonClick()
+    private void OnQuitButtonClick()
     {
-        UIManager.instance.ResetCurrentUI();
-        //LevelManager.instance.DestroyLevel();
-        GameManager.instance.isGameStarted = false;
-        GameManager.instance.isPauseMenuOpened = false;
-        GameStatesManager.instance.SetCurrentGameState(GameStatesManager.GameStates.MainMenu);
+        Application.Quit();
     }
     public UIManager.GameUI GetUIType()
     {

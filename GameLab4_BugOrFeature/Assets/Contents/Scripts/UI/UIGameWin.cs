@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIGameWin : MonoBehaviour, IGameUI
@@ -20,6 +21,7 @@ public class UIGameWin : MonoBehaviour, IGameUI
     }
     private void OnMainMenuButtonClick()
     {
+        SceneManager.LoadScene("ZenoScene");
         GameStatesManager.instance.SetCurrentGameState(GameStatesManager.GameStates.MainMenu);
     }
     public UIManager.GameUI GetUIType()

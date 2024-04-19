@@ -12,13 +12,13 @@ public class Enemy : LivingEntity
     public override void Start()
     {
         base.Start();
-        pathFinder = GetComponent<NavMeshAgent>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-
         StartCoroutine(UpdatePath());
     }
     IEnumerator UpdatePath()
     {
+        pathFinder = GetComponent<NavMeshAgent>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+
         float refreshRate = 0.3f;
         while (target != null)
         {

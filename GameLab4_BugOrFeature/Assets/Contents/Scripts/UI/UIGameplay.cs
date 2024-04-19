@@ -8,6 +8,8 @@ public class UIGameplay : MonoBehaviour, IGameUI
 {
     public UIManager.GameUI UIType;
 
+    public Text timer;
+
     public void Update() { }
     public void Init() { }
 

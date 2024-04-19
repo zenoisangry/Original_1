@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,6 +43,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Start game");
         isGameStarted = true;
+        SceneManager.LoadScene("Game");
+    }
+    public void DestroyLevel()
+    {
+        SceneManager.LoadScene("ZenoScene");
+        isGameStarted = false;
+
     }
     public void Pause(bool active)
     {

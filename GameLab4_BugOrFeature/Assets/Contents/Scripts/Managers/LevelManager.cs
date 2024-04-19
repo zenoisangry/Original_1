@@ -1,30 +1,24 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static PowerUpsManager;
 
 public class LevelManager : MonoBehaviour
 {
     public Wave[] waves;
     public Enemy enemy;
-    public GameObject legsPowerUpObject;
-    public GameObject torsoPowerUpObject;
-    public GameObject armsPowerUpObject;
-    public GameObject headPowerUpObject;
-    public Transform[] spawnPoints; // Array of spawn points
-    public Collider winCollider;
 
     Wave currentWave;
     int currentWaveNumber;
 
-    private int collectedPowerUps = 0;
-    private bool allPowerUpsCollected = false;
-
     int enemiesRemainingToSpawn;
     int enemiesRemainingAlive;
     float nextSpawnTime;
+
+    public GameObject[] objectsToCheck; // Array of objects to check for disabled status
+    public float timerDuration = 15f; // Duration of the timer in seconds
+    private float timer = 0f;
+    private bool timerStarted = false;
+    public UIGameplay timerText; // Reference to the UI Text element
 
     private static LevelManager _instance;
     public static LevelManager instance
@@ -34,57 +28,76 @@ public class LevelManager : MonoBehaviour
             if (_instance == null)
                 _instance = FindAnyObjectByType<LevelManager>();
             if (_instance == null)
-                Debug.LogError("GameManager not found, can't create singleton object");
+                Debug.LogError("LevelManager not found, can't create singleton object");
             return _instance;
         }
     }
 
-    void Start()
+    private void Start()
     {
-        SpawnPowerUp(legsPowerUpObject);
+        NextWave();
     }
-    void SpawnPowerUp(GameObject powerUpPrefab)
-    {
-        Instantiate(powerUpPrefab, spawnPoints[collectedPowerUps].position, Quaternion.identity);
-    }
-    public void CollectPowerUp()
-    {
-        collectedPowerUps++;
 
-        if (collectedPowerUps >= spawnPoints.Length)
-        {
-            allPowerUpsCollected = true;
-            // Start timer here
-            Debug.Log("All power-ups collected. Timer started.");
-        }
-        else
-        {
-            switch (collectedPowerUps)
-            {
-                case 1:
-                    SpawnPowerUp(torsoPowerUpObject);
-                    break;
-                case 2:
-                    SpawnPowerUp(armsPowerUpObject);
-                    break;
-                case 3:
-                    SpawnPowerUp(headPowerUpObject);
-                    break;
-            }
-        }
-    }
     void Update()
     {
-        Debug.Log(collectedPowerUps);
         if (enemiesRemainingToSpawn > 0 && Time.time > nextSpawnTime)
         {
-            enemiesRemainingToSpawn--;
-            nextSpawnTime = Time.time + currentWave.timeBetweenSpawns;
+            SpawnEnemy();
+        }
 
-            Enemy spawnedEnemy = Instantiate(enemy, Vector3.zero, Quaternion.identity) as Enemy;
-            spawnedEnemy.OnDeath += OnEnemyDeath;
+        bool allObjectsDisabled = CheckAllObjectsDisabled();
+
+        // If all objects are disabled and the timer hasn't started, start the timer
+        if (allObjectsDisabled && !timerStarted)
+        {
+            StartTimer();
+        }
+
+        // If the timer has started, count down
+        if (timerStarted)
+        {
+            UpdateTimer();
         }
     }
+
+    void SpawnEnemy()
+    {
+        enemiesRemainingToSpawn--;
+        nextSpawnTime = Time.time + currentWave.timeBetweenSpawns;
+
+        Enemy spawnedEnemy = Instantiate(enemy, Vector3.zero, Quaternion.identity);
+        spawnedEnemy.OnDeath += OnEnemyDeath;
+    }
+
+    bool CheckAllObjectsDisabled()
+    {
+        foreach (GameObject obj in objectsToCheck)
+        {
+            if (obj.activeSelf)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void StartTimer()
+    {
+        timerStarted = true;
+        timer = 0f;
+    }
+
+    void UpdateTimer()
+    {
+        timer += Time.deltaTime;
+
+        // If the timer reaches the duration, go to "GameWin" screen
+        if (timer >= timerDuration)
+        {
+            UIManager.instance.ShowUI(UIManager.GameUI.GameWin);
+        }
+    }
+
     void OnEnemyDeath()
     {
         enemiesRemainingAlive--;
@@ -94,6 +107,7 @@ public class LevelManager : MonoBehaviour
             NextWave();
         }
     }
+
     void NextWave()
     {
         currentWaveNumber++;
@@ -108,10 +122,22 @@ public class LevelManager : MonoBehaviour
             // Implement your spawning logic
         }
     }
+
     [System.Serializable]
     public class Wave
     {
         public int enemyCount;
         public float timeBetweenSpawns;
+    }
+
+    // This method finds any object of the specified type in the scene hierarchy
+    static new T FindAnyObjectByType<T>() where T : Object
+    {
+        T[] objects = Resources.FindObjectsOfTypeAll<T>();
+        if (objects.Length > 0)
+        {
+            return objects[0];
+        }
+        return null;
     }
 }
